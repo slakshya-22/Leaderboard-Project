@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Leaderboard</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1><span>🏆</span> LEADERBOARD <span>🏆</span></h1>
+      </header>
+      <div class="form-container">
+        <input type="text" id="firstName" placeholder="First Name" />
+        <input type="text" id="lastName" placeholder="Last Name" />
+        <select id="country">
+          <option value="" disabled selected>Select country</option>
+          <option value="USA">USA</option>
+          <option value="Canada">Canada</option>
+          <option value="UK">UK</option>
+          <option value="India">India</option>
+        </select>
+        <input type="number" id="score" placeholder="Score" />
+        <button id="addScoreBtn">Add Score</button>
+      </div>
+      <table id="leaderboard">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Name</th>
+            <th>Country</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
