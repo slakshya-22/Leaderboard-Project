@@ -7,18 +7,42 @@ const addScoreBtn = document.getElementById("addScoreBtn");
 
 let players = [];
 
-function updateLeaderboard() {
+function renderLeaderboard() {
   leaderboard.innerHTML = "";
+
   players
     .sort((a, b) => b.score - a.score)
-    .forEach((player, i) => {
-      leaderboard.innerHTML += `
-      <tr>
-        <td>${i + 1}</td>
+    .forEach((player, index) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${index + 1}</td>
         <td>${player.firstName} ${player.lastName}</td>
         <td>${player.country}</td>
         <td>${player.score}</td>
-      </tr>`;
+        <td class="actions">
+          <button class="action-btn increase-btn" title="Increase Score">+</button>
+          <button class="action-btn decrease-btn" title="Decrease Score">−</button>
+          <button class="action-btn delete-btn" title="Delete Entry">🗑</button>
+        </td>
+      `;
+
+      // Add event listeners for each button
+      row.querySelector(".increase-btn").addEventListener("click", () => {
+        player.score += 5;
+        renderLeaderboard();
+      });
+
+      row.querySelector(".decrease-btn").addEventListener("click", () => {
+        player.score -= 5;
+        renderLeaderboard();
+      });
+
+      row.querySelector(".delete-btn").addEventListener("click", () => {
+        players.splice(index, 1);
+        renderLeaderboard();
+      });
+
+      leaderboard.appendChild(row);
     });
 }
 
@@ -30,10 +54,10 @@ addScoreBtn.addEventListener("click", () => {
 
   if (firstName && lastName && country && !isNaN(score)) {
     players.push({ firstName, lastName, country, score });
-    updateLeaderboard();
+    renderLeaderboard();
     firstNameInput.value = lastNameInput.value = scoreInput.value = "";
     countrySelect.value = "";
   } else {
-    alert("Fill in all fields correctly.");
+    alert("Please fill in all fields correctly.");
   }
 });
